@@ -1,18 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { ApolloProvider } from "@apollo/client"; // Import ApolloProvider
-import client from "./apolloClient"; // Import Apollo Client
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom/client';  // Correct import for React 18
+import './index.css';
+import App from './App';
+import i18n from './i18n';  // Import i18n
+import { I18nextProvider } from 'react-i18next';
+import { ApolloProvider, InMemoryCache } from '@apollo/client';  // Import Apollo Client
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+// Create Apollo Client instance
+import { ApolloClient } from '@apollo/client';
+const client = new ApolloClient({
+  uri: 'https://rickandmortyapi.com/graphql',
+  cache: new InMemoryCache(),
+});
+
+const root = ReactDOM.createRoot(document.getElementById('root'));  // Create root for React 18
 root.render(
   <ApolloProvider client={client}>
-    <App />
+    <I18nextProvider i18n={i18n}>
+      <App />
+    </I18nextProvider>
   </ApolloProvider>
 );
-
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
