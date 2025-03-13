@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
+import { useTranslation } from 'react-i18next';
 import './characterList.css';
 
 // Define the GraphQL query to fetch characters
@@ -22,6 +23,7 @@ const GET_CHARACTERS = gql`
 
 const CharacterList = () => {
   const { loading, error, data } = useQuery(GET_CHARACTERS);
+  const { t } = useTranslation();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;

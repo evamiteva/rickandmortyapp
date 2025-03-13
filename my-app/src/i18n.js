@@ -1,37 +1,25 @@
 // src/i18n.js
-
-import i18next from 'i18next';
+import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import enTranslation from './locales/en/translation.json'; // English translations
+import esTranslation from './locales/es/translation.json'; // Spanish translations
 
-// Language resources
-const resources = {
-  en: {
-    translation: {
-      "Character Name": "Character Name",
-      "Status": "Status",
-      "Species": "Species",
-      "Gender": "Gender",
-      "Origin": "Origin",
-    }
-  },
-  de: {
-    translation: {
-      "Character Name": "Charakter Name",
-      "Status": "Status",
-      "Species": "Spezies",
-      "Gender": "Geschlecht",
-      "Origin": "Herkunft",
-    }
-  }
-};
+i18n
+  .use(initReactI18next)
+  .init({
+    resources: {
+      en: {
+        translation: enTranslation, // Assign English translations
+      },
+      es: {
+        translation: esTranslation, // Assign Spanish translations
+      },
+    },
+    lng: 'en', // Default language
+    fallbackLng: 'en',
+    interpolation: {
+      escapeValue: false, // React already escapes values
+    },
+  });
 
-i18next.use(initReactI18next).init({
-  resources,
-  lng: "en",  // Default language
-  fallbackLng: "en",
-  interpolation: {
-    escapeValue: false
-  }
-});
-
-export default i18next;
+export default i18n;
